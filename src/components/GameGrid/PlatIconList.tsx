@@ -1,6 +1,6 @@
 import type { Platform } from "../../hooks/useGames"
 
-import { HStack, Icon, Text } from "@chakra-ui/react"
+import { HStack, Icon, Box } from "@chakra-ui/react"
 import { FaWindows, FaPlaystation, FaXbox, FaApple, FaLinux, FaAndroid, FaGlobe  } from "react-icons/fa"
 import { SiApple, SiNintendo } from "react-icons/si"
 import { MdPhoneIphone } from "react-icons/md"
@@ -30,9 +30,9 @@ function PlatIconList({ platforms }: Props) {
     return (
         <HStack marginY={'10px'} gap={2}>
             {platforms.map((platform) => (
-                <>
+                <Box key={platform.id}>
                     {iconMap[platform.name] && <Icon as={iconMap[platform.name]}  color="gray.500"/>}
-                </>
+                </Box>
             ))}
         </HStack>
     )
