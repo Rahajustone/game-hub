@@ -10,12 +10,12 @@ function App() {
     <Grid templateAreas={
       { 
         base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`
+        md: `"nav nav" "aside main"`
          
       }}
     >
       <GridItem area="nav" padding={2}><NavBar /></GridItem>
-      <GridItem area="aside" display={{ base: "none", lg: "block" }}><GenreList onSelectGenre={setSelectedGenre} /></GridItem>
+      <GridItem area="aside" display={{ base: "none", md: "block" }}><GenreList onSelectGenre={setSelectedGenre} /></GridItem>
       <GridItem area="main">
         <GameGrid selectedGenre={selectedGenre} />
       </GridItem>
