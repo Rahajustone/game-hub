@@ -1,9 +1,10 @@
 import { Spinner, Heading, Image, Text, HStack, List, ListItem, Button } from "@chakra-ui/react"
 import useGenres from "../../hooks/useGenres"
 import getCroppedImageUrl from "../../services/imageUrl"
+import type { Genre } from "../../hooks/useGenres"
 
 interface Props {
-    onSelectGenre: (genreId: number) => void
+    onSelectGenre: (genre: Genre) => void
     selectedGenreId: number | null
 }
 
@@ -25,13 +26,13 @@ function GenreList({ onSelectGenre, selectedGenreId }: Props) {
                     borderRadius={5}
                     // backgroundColor={selectedGenre === genre.name ? "gray.700" : "gray.800"}
                     _hover={{ backgroundColor: "gray.700" }}
-                    onClick={() => onSelectGenre(genre.id)} 
+                    onClick={() => onSelectGenre(genre)} 
                     cursor="pointer"
                 >
                     <HStack>
                         <Image src={getCroppedImageUrl(genre.image_background)} boxSize="32px" borderRadius={8} />
                         <Button 
-                            onClick={() => onSelectGenre(genre.id)} 
+                            onClick={() => onSelectGenre(genre)} 
                             colorPalette="gray"
                             variant="ghost"
                             _hover={{ backgroundColor: "gray.700" }}
