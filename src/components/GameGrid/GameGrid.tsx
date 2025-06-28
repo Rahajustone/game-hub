@@ -18,6 +18,9 @@ function GameGrid({ selectedGenre }: Props) {
                 {isLoading && skeletons.map((skeleton) => (
                     <GameCardSkeleton key={skeleton} />
                 ))}
+                    {!isLoading && games.filter((game) => selectedGenre ? game.genres.some((genre) => genre.name === selectedGenre) : true).length === 0 && (
+                        <Text fontSize="xl" color="gray.500" textAlign="center">No games found for the selected filter.</Text>
+                    )}
                     {games.filter((game) => selectedGenre ? game.genres.some((genre) => genre.name === selectedGenre) : true).map((game) => (
                     <GameCard key={game.id} game={game} />
                 ))}
