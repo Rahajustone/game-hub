@@ -7,9 +7,8 @@ function NavBar() {
     const { toggleColorMode, colorMode } = useColorMode()
 
     return (
-        <HStack>
+        <HStack justifyContent="space-between" padding={2}>
             <Image src={logo} boxSize="60px" />
-            <Text>Navbar</Text>
             <ClientOnly fallback={<Skeleton boxSize="8" />}>
                 <IconButton onClick={toggleColorMode} variant="outline" size="sm">
                     {colorMode === "light" ? <LuSun /> : <LuMoon />}

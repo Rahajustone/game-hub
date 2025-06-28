@@ -5,7 +5,7 @@ interface Props {
     onSelectGenre: (genre: string) => void
 }
 
-function GenreList({ onSelectGenre }: Props) {
+function GenreListSkeleton ({ onSelectGenre }: Props) {
     const { data, error, isLoading } = useGenres()
     
     if (error) return null
@@ -13,7 +13,7 @@ function GenreList({ onSelectGenre }: Props) {
     if (!data || !Array.isArray(data)) return null
     
     return (
-        <Box padding="10px">
+        <Box padding="1">
             <Heading fontSize="2xl" marginBottom={3}>Genres</Heading>
             <VStack gap={2} align="stretch">
                 {data.map((genre) => (
