@@ -14,23 +14,23 @@ function GenreList({ onSelectGenre }: Props) {
     if (!data || !Array.isArray(data)) return null
     
     return (
-        <List.Root padding="5px">
+        <List.Root padding="5px" width="200px">
             <Heading fontSize="2xl" marginBottom={3}>Genres</Heading>
-                {data.map((genre) => (
-                    <ListItem 
-                        key={genre.id} 
-                        onClick={() => onSelectGenre(genre.name)} 
-                        cursor="pointer"
-                        padding={2}
-                        borderRadius={5}
-                        _hover={{ backgroundColor: "gray.700" }}
-                    >
-                        <HStack>
-                            <Image src={getCroppedImageUrl(genre.image_background)} boxSize="32px" borderRadius={8} />
-                            <Text>{genre.name}</Text>
-                        </HStack>
-                    </ListItem>
-                ))}
+            {data.map((genre) => (
+                <ListItem 
+                    key={genre.id} 
+                    onClick={() => onSelectGenre(genre.name)} 
+                    cursor="pointer"
+                    padding={2}
+                    borderRadius={5}
+                    _hover={{ backgroundColor: "gray.700" }}
+                >
+                    <HStack>
+                        <Image src={getCroppedImageUrl(genre.image_background)} boxSize="32px" borderRadius={8} />
+                        <Text>{genre.name}</Text>
+                    </HStack>
+                </ListItem>
+            ))}
         </List.Root>
     )
 }
