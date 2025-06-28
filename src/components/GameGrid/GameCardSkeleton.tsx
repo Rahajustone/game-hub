@@ -4,7 +4,7 @@ import GameCardContainer from "./GameCardContainer"
 function GameCardSkeleton() {
     return (
         <GameCardContainer>
-            <Skeleton backgroundColor="gray.600" />
+            <Skeleton height="200px" backgroundColor="gray.600" />
             <Box p="6">
                 <Skeleton height="32px" width="80%" marginBottom={2} backgroundColor="gray.600" />
                 <HStack justifyContent="space-between" marginBottom={2}>

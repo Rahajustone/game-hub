@@ -1,9 +1,14 @@
 import { Button, Menu, Portal, Spinner } from "@chakra-ui/react"
 import { LuChevronDown, LuChevronUp } from "react-icons/lu"
 import { useState } from "react"
-import usePlatforms from "../../hooks/usePlatform"
+import usePlatforms, { type Platform } from "../../hooks/usePlatform"
 
-function PlatformSelector() {
+interface Props {
+    onSelectPlatform: (platform: Platform) => void
+    selectedPlatform: Platform | null
+}
+
+function PlatformSelector({ onSelectPlatform, selectedPlatform }: Props) {
     const [isOpen, setIsOpen] = useState(false)
     const { data, error, isLoading } = usePlatforms()
 
@@ -15,7 +20,7 @@ function PlatformSelector() {
         <Menu.Root open={isOpen} onOpenChange={(e) => setIsOpen(e.open)}>
             <Menu.Trigger asChild>
                 <Button variant="outline" size="sm" onClick={() => setIsOpen(!isOpen)}>
-                    Platform
+                    {selectedPlatform?.name || "Platform"}
                     {isOpen ? <LuChevronUp /> : <LuChevronDown />}
                 </Button>
             </Menu.Trigger>
@@ -23,7 +28,11 @@ function PlatformSelector() {
                 <Menu.Positioner>
                     <Menu.Content>
                         {data.map((platform) => (
-                            <Menu.Item key={platform.id} value={platform.name}>
+                            <Menu.Item 
+                                key={platform.id} 
+                                value={platform.name}
+                                onClick={() => onSelectPlatform(platform)}
+                            >
                                 {platform.name}
                             </Menu.Item>
                         ))}

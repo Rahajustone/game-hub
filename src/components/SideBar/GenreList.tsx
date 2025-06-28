@@ -3,11 +3,11 @@ import useGenres from "../../hooks/useGenres"
 import getCroppedImageUrl from "../../services/imageUrl"
 
 interface Props {
-    onSelectGenre: (genre: string) => void
-    selectedGenre: string
+    onSelectGenre: (genreId: number) => void
+    selectedGenreId: number | null
 }
 
-function GenreList({ onSelectGenre, selectedGenre }: Props) {
+function GenreList({ onSelectGenre, selectedGenreId }: Props) {
     const { data, error, isLoading } = useGenres()
 
     
@@ -25,13 +25,13 @@ function GenreList({ onSelectGenre, selectedGenre }: Props) {
                     borderRadius={5}
                     // backgroundColor={selectedGenre === genre.name ? "gray.700" : "gray.800"}
                     _hover={{ backgroundColor: "gray.700" }}
-                    onClick={() => onSelectGenre(genre.name)} 
+                    onClick={() => onSelectGenre(genre.id)} 
                     cursor="pointer"
                 >
                     <HStack>
                         <Image src={getCroppedImageUrl(genre.image_background)} boxSize="32px" borderRadius={8} />
                         <Button 
-                            onClick={() => onSelectGenre(genre.name)} 
+                            onClick={() => onSelectGenre(genre.id)} 
                             colorPalette="gray"
                             variant="ghost"
                             _hover={{ backgroundColor: "gray.700" }}
@@ -39,7 +39,7 @@ function GenreList({ onSelectGenre, selectedGenre }: Props) {
                             _focus={{ backgroundColor: "gray.700", outline: "none" }}
                             _focusVisible={{ backgroundColor: "gray.700", outline: "none" }}
                             _focusWithin={{ backgroundColor: "gray.700", outline: "none" }}
-                            fontWeight={selectedGenre === genre.name ? "bold" : "normal"}
+                            fontWeight={selectedGenreId === genre.id ? "bold" : "normal"}
                         >
                             {genre.name}
                         </Button>
