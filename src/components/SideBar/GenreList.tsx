@@ -1,13 +1,15 @@
-import { Spinner, VStack, Heading, Image, Text, HStack, List, ListItem } from "@chakra-ui/react"
+import { Spinner, Heading, Image, Text, HStack, List, ListItem, Button } from "@chakra-ui/react"
 import useGenres from "../../hooks/useGenres"
 import getCroppedImageUrl from "../../services/imageUrl"
 
 interface Props {
     onSelectGenre: (genre: string) => void
+    selectedGenre: string
 }
 
-function GenreList({ onSelectGenre }: Props) {
+function GenreList({ onSelectGenre, selectedGenre }: Props) {
     const { data, error, isLoading } = useGenres()
+
     
     if (error) return null
     if (isLoading) return <Spinner />
@@ -19,15 +21,26 @@ function GenreList({ onSelectGenre }: Props) {
             {data.map((genre) => (
                 <ListItem 
                     key={genre.id} 
-                    onClick={() => onSelectGenre(genre.name)} 
-                    cursor="pointer"
                     padding={2}
                     borderRadius={5}
+                    // backgroundColor={selectedGenre === genre.name ? "gray.700" : "gray.800"}
                     _hover={{ backgroundColor: "gray.700" }}
+                    onClick={() => onSelectGenre(genre.name)} 
+                    cursor="pointer"
                 >
                     <HStack>
                         <Image src={getCroppedImageUrl(genre.image_background)} boxSize="32px" borderRadius={8} />
-                        <Text>{genre.name}</Text>
+                        <Button 
+                            onClick={() => onSelectGenre(genre.name)} 
+                            colorPalette="gray" fontWeight={selectedGenre === genre.name ? "bold" : "normal"} variant="ghost"
+                            _hover={{ backgroundColor: "gray.700" }}
+                            _active={{ backgroundColor: "gray.700" }}
+                            _focus={{ backgroundColor: "gray.700" }}
+                            _focusVisible={{ backgroundColor: "gray.700" }}
+                            _focusWithin={{ backgroundColor: "gray.700" }}
+                        >
+                            {genre.name}
+                        </Button>
                     </HStack>
                 </ListItem>
             ))}
