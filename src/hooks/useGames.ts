@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import apiClient from "../services/apiClient"
+import { CanceledError } from "axios"
 
 interface Game {
     id: number
@@ -22,11 +23,18 @@ const useGames = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        const controller = new AbortController()
         setIsLoading(true)
-        apiClient.get<GameResponse>("/games").then((res) => {
+        apiClient.get<GameResponse>("/games", { signal: controller.signal }).then((res) => {
             setGames(res.data.results)
             setIsLoading(false)
+        }).catch((err) => {
+            if(err instanceof CanceledError) return
+            setError(err.message)
+            setIsLoading(false)
         })
+
+        return () => controller.abort()
     }, [])
 
     return { games, error, isLoading }
