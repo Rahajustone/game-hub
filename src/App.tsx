@@ -13,8 +13,8 @@ function App() {
       }}
     >
       <GridItem area="nav" padding={2}><NavBar /></GridItem>
-      <GridItem area="aside" bg="blue" display={{ base: "none", lg: "block" }}>Aside</GridItem>
-      <GridItem area="main" bg="green">
+      <GridItem area="aside" display={{ base: "none", lg: "block" }}>Aside</GridItem>
+      <GridItem area="main">
         <GameGrid />
       </GridItem>
     </Grid>
