@@ -32,12 +32,14 @@ function GenreList({ onSelectGenre, selectedGenre }: Props) {
                         <Image src={getCroppedImageUrl(genre.image_background)} boxSize="32px" borderRadius={8} />
                         <Button 
                             onClick={() => onSelectGenre(genre.name)} 
-                            colorPalette="gray" fontWeight={selectedGenre === genre.name ? "bold" : "normal"} variant="ghost"
+                            colorPalette="gray"
+                            variant="ghost"
                             _hover={{ backgroundColor: "gray.700" }}
                             _active={{ backgroundColor: "gray.700" }}
-                            _focus={{ backgroundColor: "gray.700" }}
-                            _focusVisible={{ backgroundColor: "gray.700" }}
-                            _focusWithin={{ backgroundColor: "gray.700" }}
+                            _focus={{ backgroundColor: "gray.700", outline: "none" }}
+                            _focusVisible={{ backgroundColor: "gray.700", outline: "none" }}
+                            _focusWithin={{ backgroundColor: "gray.700", outline: "none" }}
+                            fontWeight={selectedGenre === genre.name ? "bold" : "normal"}
                         >
                             {genre.name}
                         </Button>
