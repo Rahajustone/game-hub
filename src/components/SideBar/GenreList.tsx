@@ -16,7 +16,7 @@ function GenreList({ onSelectGenre, selectedGenreId }: Props) {
     return (
         <List.Root padding="5px" width="200px">
             <Heading fontSize="3xl" marginBottom={3} whiteSpace="nowrap">Genres</Heading>
-            {data.map((genre) => (
+            {data?.map((genre) => (
                 <ListItem 
                     key={genre.id} 
                     padding={2}

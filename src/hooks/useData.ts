@@ -4,7 +4,7 @@ import apiClient from "../services/apiClient"
 import type { AxiosRequestConfig } from "axios"
 import { CanceledError } from "axios"
 
-interface FetchResponse<T> {
+export interface FetchResponse<T> {
     count: number
     next: string | null
     previous: string | null
