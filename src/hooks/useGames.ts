@@ -1,33 +1,7 @@
 import { useEffect, useState, useMemo } from "react"
 import { CanceledError } from "axios"
 import type { GameQuery } from "../App"
-import gameService from "../services/gameServices"
-
-export interface Platform {
-    id: number
-    name: string
-    slug: string
-}
-
-export interface Game {
-    id: number
-    slug: string
-    name: string
-    background_image: string
-    rating_top: number
-    rating: number
-    parent_platforms: { platform: Platform }[]
-    metacritic: number
-    genre_id: number
-    genres: { id: number, name: string }[]
-}
-
-export interface GameResponse {
-    count: number
-    next: string
-    previous: string
-    results: Game[]
-}
+import gameService, { type Game } from "../services/gameServices"
 
 const useGames = (gameQuery: GameQuery) => {
     const [games, setGames] = useState<Game[]>([])

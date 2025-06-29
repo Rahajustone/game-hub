@@ -1,10 +1,14 @@
 import axios from "axios"
 import type { AxiosRequestConfig } from "axios"
 import { API_URL } from "../constants"
-import type { FetchResponse } from "../hooks/useData"
 
 // Debug: Log the environment variable
-
+export interface FetchResponse<T> {
+    count: number
+    next: string | null
+    previous: string | null
+    results: T[]
+}
 
 const axiosInstance = axios.create({
     baseURL: API_URL,
