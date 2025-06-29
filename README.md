@@ -1,5 +1,7 @@
 # 🎮 Game Hub
 
+![Game Hub Demo](public/screenshot.png)
+
 A modern React application for browsing and discovering video games, built with Chakra UI v3, TypeScript, and Vite.
 
 ## 🚀 Features
@@ -306,3 +308,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 **Built with ❤️ using React, TypeScript, and Chakra UI v3**
+
+## 🖼️ Demo
+
+![Game Hub Demo](public/screenshot.png)
