@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import apiClient from "../services/apiClient"
 import { CanceledError } from "axios"
 import type { GameQuery } from "../App"
@@ -33,15 +33,18 @@ const useGames = (gameQuery: GameQuery) => {
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(true)
 
+    const params = useMemo(() => {
+        const queryParams: any = {}
+        if (gameQuery.genre?.id) queryParams.genres = gameQuery.genre.id
+        if (gameQuery.platform?.id) queryParams.platforms = gameQuery.platform.id
+        if (gameQuery.sortOrder) queryParams.ordering = gameQuery.sortOrder
+        return queryParams
+    }, [gameQuery.genre?.id, gameQuery.platform?.id, gameQuery.sortOrder])
+
     useEffect(() => {
         const controller = new AbortController()
         setIsLoading(true)
         
-        const params: any = {}
-        if (gameQuery.genre?.id) params.genres = gameQuery.genre?.id
-        if (gameQuery.platform?.id) params.platforms = gameQuery.platform?.id
-        if (gameQuery.sortOrder) params.ordering = gameQuery.sortOrder
-
         apiClient.get<GameResponse>("/games", { 
             params,
             signal: controller.signal 
@@ -55,7 +58,7 @@ const useGames = (gameQuery: GameQuery) => {
         })
 
         return () => controller.abort()
-    }, [gameQuery])
+    }, [params])
 
     return { games, error, isLoading }
 }
