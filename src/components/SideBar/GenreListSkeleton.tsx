@@ -1,4 +1,4 @@
-import { Spinner, Box, VStack, Heading } from "@chakra-ui/react"
+import { Box, Heading, Spinner, VStack } from "@chakra-ui/react"
 import useGenres from "../../hooks/useGenres"
 
 interface Props {

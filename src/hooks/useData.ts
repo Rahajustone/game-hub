@@ -1,6 +1,5 @@
-import { useState } from "react"
-import { useEffect } from "react"
 import type { AxiosRequestConfig } from "axios"
+import { useEffect, useState } from "react"
 import useData from "../services/useData"
 
 function useDataHooks<T>(endpoint: string, requestConfig: AxiosRequestConfig) {

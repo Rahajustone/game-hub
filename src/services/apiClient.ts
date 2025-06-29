@@ -1,5 +1,5 @@
-import axios from "axios"
 import type { AxiosRequestConfig } from "axios"
+import axios from "axios"
 import { API_URL } from "../constants"
 
 // Debug: Log the environment variable

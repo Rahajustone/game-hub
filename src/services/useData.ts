@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
-import ApiClient from "./apiClient"
 import type { AxiosRequestConfig } from "axios"
+import ApiClient from "./apiClient"
 
 const useData = <T>(endpoint: string, requestConfig: AxiosRequestConfig) => {
     return useQuery({

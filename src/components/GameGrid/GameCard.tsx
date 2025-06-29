@@ -1,10 +1,10 @@
 import { Box, Heading, HStack, Image } from "@chakra-ui/react"
-import type { Game } from "../../hooks/useGames"
-import PlatIconList from "./PlatIconList"
-import CreditScore from "./CreditScore"
+import type { Game } from "../../services/gameServices"
 import getCroppedImageUrl from "../../services/imageUrl"
-import GameCardContainer from "./GameCardContainer"
+import CreditScore from "./CreditScore"
 import Emoji from "./Emoji"
+import GameCardContainer from "./GameCardContainer"
+import PlatIconList from "./PlatIconList"
 
 interface Props {
     game: Game

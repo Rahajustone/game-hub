@@ -1,7 +1,8 @@
 import { Button, Menu, Portal, Spinner } from "@chakra-ui/react"
-import { LuChevronDown, LuChevronUp } from "react-icons/lu"
 import { useState } from "react"
-import usePlatforms, { type Platform } from "../../hooks/usePlatform"
+import { LuChevronDown, LuChevronUp } from "react-icons/lu"
+import usePlatforms from "../../hooks/usePlatform"
+import type { Platform } from "../../services/platformServices"
 
 interface Props {
     onSelectPlatform: (platform: Platform) => void
