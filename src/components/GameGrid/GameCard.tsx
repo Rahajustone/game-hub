@@ -14,13 +14,13 @@ function GameCard({ game }: Props) {
         <GameCardContainer>
             <Image src={getCroppedImageUrl(game.background_image)} />
             <Box p="6">
-                <Heading size="md" fontSize="2xl">{game.name}</Heading>
                 <HStack justifyContent="space-between" marginBottom={2}>
                     <Box>
                         <PlatIconList platforms={game.parent_platforms.map((p) => p.platform)} />
                     </Box>
                     <CreditScore score={game.metacritic} />
                 </HStack>
+                <Heading size="md" fontSize="2xl">{game.name}</Heading>
             </Box>
             {/* <Box>
                 <Text>{game.rating}</Text>
