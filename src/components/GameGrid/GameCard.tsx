@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Image, Text } from "@chakra-ui/react"
+import { Box, Heading, HStack, Image } from "@chakra-ui/react"
 import type { Game } from "../../hooks/useGames"
 import PlatIconList from "./PlatIconList"
 import CreditScore from "./CreditScore"

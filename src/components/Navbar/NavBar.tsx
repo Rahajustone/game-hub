@@ -1,4 +1,4 @@
-import { ClientOnly, HStack, IconButton, Image, Skeleton, Text } from "@chakra-ui/react"
+import { ClientOnly, HStack, IconButton, Image, Skeleton } from "@chakra-ui/react"
 import { useColorMode } from "../../components/ui/color-mode"
 import logo from "../../assets/Logo/logo.webp"
 import { LuMoon, LuSun } from "react-icons/lu"

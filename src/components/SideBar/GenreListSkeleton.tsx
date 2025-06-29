@@ -33,4 +33,4 @@ function GenreListSkeleton ({ onSelectGenre }: Props) {
     )
 }
 
-export default GenreList    
+export default GenreListSkeleton    

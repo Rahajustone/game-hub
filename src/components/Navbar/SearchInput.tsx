@@ -1,5 +1,5 @@
 import { Input, InputGroup } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { LuSearch } from "react-icons/lu"
 
 interface Props {
@@ -19,7 +19,7 @@ function SearchInput({ onSearch }: Props) {
             <InputGroup startElement={<LuSearch />}>
                 <Input
                     borderRadius={20}
-                    borderColor="gray.300"
+                    borderColor="border"
                     borderWidth={1}
                     borderStyle="solid"
                     variant="outline"
