@@ -12,7 +12,7 @@ function NavBar() {
             <Image src={logo} boxSize="60px" />
             <SearchInput />
             <ClientOnly fallback={<Skeleton boxSize="8" />}>
-                <IconButton onClick={toggleColorMode} variant="outline" size="sm">
+                <IconButton onClick={toggleColorMode} variant="outline" size="sm" aria-label="Toggle color mode" borderRadius={20}>
                     {colorMode === "light" ? <LuSun /> : <LuMoon />}
                 </IconButton>
             </ClientOnly>
