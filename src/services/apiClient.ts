@@ -6,7 +6,7 @@ const apiClient = axios.create({
         "Content-Type": "application/json"
     },
     params: {
-        key: 'useyourownkey' // use your own key from rawg.io
+        key: import.meta.env.VITE_API_KEY
     }
 })
 
