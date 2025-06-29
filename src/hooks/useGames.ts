@@ -40,6 +40,7 @@ const useGames = (gameQuery: GameQuery) => {
         const params: any = {}
         if (gameQuery.genre?.id) params.genres = gameQuery.genre?.id
         if (gameQuery.platform?.id) params.platforms = gameQuery.platform?.id
+        if (gameQuery.sortOrder) params.ordering = gameQuery.sortOrder
 
         apiClient.get<GameResponse>("/games", { 
             params,
