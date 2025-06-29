@@ -19,6 +19,9 @@ function SearchInput({ onSearch }: Props) {
             <InputGroup startElement={<LuSearch />}>
                 <Input
                     borderRadius={20}
+                    borderColor="gray.300"
+                    borderWidth={1}
+                    borderStyle="solid"
                     variant="outline"
                     placeholder="Search games..."
                     value={value}

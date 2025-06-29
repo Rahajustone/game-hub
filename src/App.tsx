@@ -7,6 +7,7 @@ import { useState, useCallback } from 'react'
 import { type Platform } from './hooks/usePlatform'
 import { type Genre } from './hooks/useGenres'
 import SortSelector from './components/SortSelector/SortSelector'
+import GameHeading from './components/GameHeading/GameHeading'
 
 export interface GameQuery {
   genre: Genre | null
@@ -50,7 +51,8 @@ function App() {
         <GenreList onSelectGenre={handleGenreSelect} selectedGenreId={gameQuery.genre?.id ?? null} />
       </GridItem>
       <GridItem area="main">
-        <HStack gap={5} padding={10}>
+        <GameHeading gameQuery={gameQuery} />
+        <HStack gap={5} paddingY={10}>
           <PlatformSelector
             onSelectPlatform={handlePlatformSelect}
             selectedPlatform={gameQuery.platform} />
