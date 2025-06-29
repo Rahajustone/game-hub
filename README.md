@@ -1,4 +1,5 @@
 # 🎮 Game Hub
+[Check out the live app!](https://game-hub-nu-henna-93.vercel.app/)
 
 ![Game Hub Demo](public/screenshot.png)
 
@@ -311,4 +312,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🖼️ Demo
 
-![Game Hub Demo](public/screenshot.png)
+
