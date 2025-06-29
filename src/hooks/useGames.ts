@@ -14,6 +14,7 @@ export interface Game {
     slug: string
     name: string
     background_image: string
+    rating_top: number
     rating: number
     parent_platforms: { platform: Platform }[]
     metacritic: number
