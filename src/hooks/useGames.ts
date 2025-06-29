@@ -38,8 +38,10 @@ const useGames = (gameQuery: GameQuery) => {
         if (gameQuery.genre?.id) queryParams.genres = gameQuery.genre.id
         if (gameQuery.platform?.id) queryParams.platforms = gameQuery.platform.id
         if (gameQuery.sortOrder) queryParams.ordering = gameQuery.sortOrder
+        if (gameQuery.searchText) queryParams.search = gameQuery.searchText
+        
         return queryParams
-    }, [gameQuery.genre?.id, gameQuery.platform?.id, gameQuery.sortOrder])
+    }, [gameQuery.genre?.id, gameQuery.platform?.id, gameQuery.sortOrder, gameQuery.searchText])
 
     useEffect(() => {
         const controller = new AbortController()

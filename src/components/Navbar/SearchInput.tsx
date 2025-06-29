@@ -1,20 +1,31 @@
-import { Input, InputGroup  } from "@chakra-ui/react"
-import { useState } from "react"
+import { Input, InputGroup } from "@chakra-ui/react"
+import { useEffect, useState } from "react"
 import { LuSearch } from "react-icons/lu"
 
-function SearchInput() {
+interface Props {
+    onSearch: (searchText: string) => void
+}
+
+function SearchInput({ onSearch }: Props) {
     const [value, setValue] = useState("")
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        onSearch(value)
+    }
+
     return (
-        <InputGroup startElement={<LuSearch />}>
-            <Input
-                borderRadius={20}
-                variant="outline"
-                placeholder="Search games..."
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-            />
-        </InputGroup>
+        <form onSubmit={handleSubmit}>
+            <InputGroup startElement={<LuSearch />}>
+                <Input
+                    borderRadius={20}
+                    variant="outline"
+                    placeholder="Search games..."
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                />
+            </InputGroup>
+        </form>
     )
 }
 
