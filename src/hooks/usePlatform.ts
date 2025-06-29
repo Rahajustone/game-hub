@@ -1,4 +1,5 @@
-import useData from "./useData"
+import { useQuery } from "@tanstack/react-query"
+import platformService from "../services/platformServices"
 
 export interface Platform {
     id: number
@@ -6,6 +7,12 @@ export interface Platform {
     slug: string
 }
 
-const usePlatforms = () =>  useData<Platform>("/platforms/lists/parents", { params: { pageSize: 100 } });
+const usePlatforms = () => {
+    return useQuery({
+        queryKey: ["platforms"],
+        queryFn: () => platformService.getAll().then((res) => res.data.results),
+        staleTime: 1000 * 60 * 5, // 15 minutes
+    })
+}
 
 export default usePlatforms

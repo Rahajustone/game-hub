@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react"
 import apiClient from "../services/apiClient"
 import { CanceledError } from "axios"
 import type { GameQuery } from "../App"
+import gameService from "../services/gameServices"
 
 export interface Platform {
     id: number
@@ -48,10 +49,7 @@ const useGames = (gameQuery: GameQuery) => {
         const controller = new AbortController()
         setIsLoading(true)
         
-        apiClient.get<GameResponse>("/games", { 
-            params,
-            signal: controller.signal 
-        }).then((res) => {
+        gameService.getAll().then((res) => {
             setGames(res.data.results)
             setIsLoading(false)
         }).catch((err) => {

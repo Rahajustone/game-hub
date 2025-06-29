@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import apiClient from "../services/apiClient"
 import type { AxiosRequestConfig } from "axios"
 import { CanceledError } from "axios"
+import useData from "../services/useData"
 
 export interface FetchResponse<T> {
     count: number
@@ -19,14 +20,10 @@ function useData<T>(endpoint: string, requestConfig: AxiosRequestConfig) {
     useEffect(() => {
         const controller = new AbortController()
         setIsLoading(true)
-        apiClient.get<FetchResponse<T>>(endpoint, { ...requestConfig, signal: controller.signal }).then((res) => {
-            setData(res.data.results)
-            setIsLoading(false)
-        }).catch((err) => {
-            if(err instanceof CanceledError) return
-            setError(err.message)
-            setIsLoading(false)
-        })
+        const { data, error, isLoading } = useData<T>(endpoint, { ...requestConfig, signal: controller.signal })
+        setData(data)
+        setError(error)
+        setIsLoading(isLoading)
 
         return () => controller.abort()
     }, [])
