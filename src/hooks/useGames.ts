@@ -1,5 +1,4 @@
 import { useEffect, useState, useMemo } from "react"
-import apiClient from "../services/apiClient"
 import { CanceledError } from "axios"
 import type { GameQuery } from "../App"
 import gameService from "../services/gameServices"
