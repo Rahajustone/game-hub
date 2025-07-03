@@ -1,4 +1,4 @@
-import type { Platform } from "../../hooks/useGames"
+import type { Platform } from "../../services/platformServices"
 
 import { Box, HStack, Icon } from "@chakra-ui/react"
 import { FaAndroid, FaApple, FaGlobe, FaLinux, FaPlaystation, FaWindows, FaXbox } from "react-icons/fa"

@@ -1,40 +1,27 @@
-import { CanceledError } from "axios"
-import { useEffect, useMemo, useState } from "react"
 import type { GameQuery } from "../App"
-import gameService, { type Game } from "../services/gameServices"
+import { type Game } from "../services/gameServices"
+import { type FetchResponse } from "../services/apiClient"
+import { useInfiniteQuery } from "@tanstack/react-query"
+import ApiClient from "../services/apiClient";
+
+
+const apiClient = new ApiClient<Game>("/games");
 
 const useGames = (gameQuery: GameQuery) => {
-    const [games, setGames] = useState<Game[]>([])
-    const [error, setError] = useState("")
-    const [isLoading, setIsLoading] = useState(true)
 
-    const params = useMemo(() => {
-        const queryParams: any = {}
-        if (gameQuery.genre?.id) queryParams.genres = gameQuery.genre.id
-        if (gameQuery.platform?.id) queryParams.platforms = gameQuery.platform.id
-        if (gameQuery.sortOrder) queryParams.ordering = gameQuery.sortOrder
-        if (gameQuery.searchText) queryParams.search = gameQuery.searchText
-        
-        return queryParams
-    }, [gameQuery.genre?.id, gameQuery.platform?.id, gameQuery.sortOrder, gameQuery.searchText])
+    const { data, error, isLoading, fetchNextPage, hasNextPage } =
+    useInfiniteQuery<FetchResponse<Game>, Error>({
+        queryKey: ["games", gameQuery],
+        queryFn: ({ pageParam = 1 }) => {
+            return apiClient.getAll({ params: { page: pageParam, ...gameQuery } })  
+        },
+        getNextPageParam: (lastPage, pages) => lastPage.next ? pages.length + 1 : undefined,
+        initialPageParam: 1,
+    })
 
-    useEffect(() => {
-        const controller = new AbortController()
-        setIsLoading(true)
-        
-        gameService.getAll().then((res) => {
-            setGames(res.data.results)
-            setIsLoading(false)
-        }).catch((err) => {
-            if(err instanceof CanceledError) return
-            setError(err.message)
-            setIsLoading(false)
-        })
+    const games = data?.pages.flatMap(page => page.results) || []
 
-        return () => controller.abort()
-    }, [params])
-
-    return { games, error, isLoading }
+    return { games, error, isLoading, fetchNextPage, hasNextPage }
 }
 
 export default useGames

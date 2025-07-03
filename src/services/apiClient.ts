@@ -22,30 +22,29 @@ const axiosInstance = axios.create({
 
 class ApiClient<T> {
     endpoint: string
-    config: AxiosRequestConfig
-    constructor(endpoint: string, config: AxiosRequestConfig) {
+    constructor(endpoint: string,) {
         this.endpoint = endpoint
-        this.config = config
     }
 
-    getAll = () => {
-        return axiosInstance.get<FetchResponse<T>>(this.endpoint, this.config)
+    getAll = (config: AxiosRequestConfig) => {
+        return axiosInstance.get<FetchResponse<T>>(this.endpoint, config)
+        .then((res) => res.data)
     }
 
     get = (id: number) => {
-        return axiosInstance.get<T>(`${this.endpoint}/${id}`, this.config)
+        return axiosInstance.get<T>(`${this.endpoint}/${id}`)
     }
 
     create = (data: T) => {
-        return axiosInstance.post(this.endpoint, data, this.config)
+        return axiosInstance.post(this.endpoint, data)
     }
 
     update = (data: T) => {
-        return axiosInstance.put(this.endpoint, data, this.config)  
+        return axiosInstance.put(this.endpoint, data)  
     }
 
     delete = (id: number) => {
-        return axiosInstance.delete(`${this.endpoint}/${id}`, this.config)
+        return axiosInstance.delete(`${this.endpoint}/${id}`)
     }
 }
 

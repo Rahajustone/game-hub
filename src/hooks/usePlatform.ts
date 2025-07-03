@@ -1,12 +1,21 @@
 import { useQuery } from "@tanstack/react-query"
-import platformService from "../services/platformServices"
+import { type Platform } from "../services/platformServices"
+import ApiClient from "../services/apiClient"
+
+const apiClient = new ApiClient<Platform>("/platforms");
 
 const usePlatforms = () => {
-    return useQuery({
+    const { data, error, isLoading } = useQuery({
         queryKey: ["platforms"],
-        queryFn: () => platformService.getAll().then((res) => res.data.results),
+        queryFn: () => apiClient.getAll({ params: { pageSize: 100 } }),
         staleTime: 1000 * 60 * 5, // 15 minutes
     })
+
+    return { 
+        data: data?.results || [], 
+        error, 
+        isLoading 
+    }
 }
 
 export default usePlatforms
