@@ -1,4 +1,5 @@
 import { Box, Heading, HStack, Image } from "@chakra-ui/react"
+import { Link } from "react-router-dom"
 import type { Game } from "../../services/gameServices"
 import getCroppedImageUrl from "../../services/imageUrl"
 import CreditScore from "./CreditScore"
@@ -12,6 +13,7 @@ interface Props {
 
 function GameCard({ game }: Props) {    
     return (
+
         <GameCardContainer>
             <Image src={getCroppedImageUrl(game.background_image)} />
             <Box p="6">
@@ -21,9 +23,11 @@ function GameCard({ game }: Props) {
                     </Box>
                     <CreditScore score={game.metacritic} />
                 </HStack>
-                <Heading size="md" fontSize="2xl">{game.name}
-                    <Emoji rating={game.rating_top} />
-                </Heading>
+                <Link to={`/games/${game.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Heading size="md" fontSize="2xl">{game.name}
+                        <Emoji rating={game.rating_top} />
+                    </Heading>
+                </Link>
                 
                 
             </Box>

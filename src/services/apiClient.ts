@@ -31,7 +31,7 @@ class ApiClient<T> {
         .then((res) => res.data)
     }
 
-    get = (id: number) => {
+    get = (id: string) => {
         return axiosInstance.get<T>(`${this.endpoint}/${id}`)
     }
 
