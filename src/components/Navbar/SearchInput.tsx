@@ -17,16 +17,17 @@ function SearchInput() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <InputGroup startElement={<LuSearch />}>
+            <InputGroup startElement={<LuSearch />} maxW="600px" w="100%">
                 <Input
                     borderRadius={20}
-                    borderColor="border"
+                    borderColor="chakra-border-color"
                     borderWidth={1}
                     borderStyle="solid"
                     variant="outline"
                     placeholder="Search games..."
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
+                    bg="chakra-body-bg"
                 />
             </InputGroup>
         </form>
