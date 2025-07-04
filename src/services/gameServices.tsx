@@ -1,5 +1,7 @@
 import ApiClient from "./apiClient"
 import type { Platform } from "./platformServices"
+import axios from "axios"
+import { API_URL } from "../constants"
 
 export interface Game {
     id: number
@@ -50,8 +52,42 @@ export interface Game {
     platforms: any[]
     parent_platforms: { platform: Platform }[]
     genres: { id: number, name: string }[]
+    publishers: { id: number, name: string }[]
+    developers: { id: number, name: string }[]
+}
+
+export interface GameTrailer {
+    id: number
+    name: string
+    preview: string
+    data: {
+        "480": string
+        max: string
+    }
 }
 
 const gameService = new ApiClient<Game>("/games")
+
+export const getGameTrailers = async (gameSlug: string): Promise<GameTrailer[]> => {
+    try {
+        const response = await axios.get(`${API_URL}/games/${gameSlug}/movies`, {
+            params: {
+                key: import.meta.env.VITE_API_KEY
+            }
+        });
+        
+        console.log('Trailers API response:', response.data);
+        console.log('Response structure:', {
+            count: response.data.count,
+            results: response.data.results?.length || 0,
+            hasResults: !!response.data.results
+        });
+        
+        return response.data.results || [];
+    } catch (error) {
+        console.log('No trailers available for this game');
+        return [];
+    }
+};
 
 export default gameService

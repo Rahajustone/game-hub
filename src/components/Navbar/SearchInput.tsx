@@ -2,14 +2,17 @@ import { Input, InputGroup } from "@chakra-ui/react"
 import { useState } from "react"
 import { LuSearch } from "react-icons/lu"
 import useGameQueryStore from "../../store/gameQueryStore"
+import { useNavigate } from "react-router-dom"
 
 function SearchInput() {
     const [value, setValue] = useState("")
     const setSearchText = useGameQueryStore(s => s.setSearchText)
+    const navigate = useNavigate()
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setSearchText(value)
+        navigate("/")
     }
 
     return (
