@@ -1,37 +1,22 @@
-import genres from "../data/genres"
-// import useData from "./useData"
+import { useQuery } from "@tanstack/react-query"
+import { type Genre } from "../services/genreServices"
+import ApiClient from "../services/apiClient"
+import ms from "ms"
 
-export interface Genre {
-    id: number
-    name: string
-    slug: string
-    image_background: string
+const apiClient = new ApiClient<Genre>("/genres");
+
+function useGenres() {
+    const { data, error, isLoading } = useQuery({
+        queryKey: ["genres"],
+        queryFn: () => apiClient.getAll({ params: { pageSize: 100 } }),
+        staleTime: ms("15m"),
+    })
+
+    return { 
+        data: data?.results || [], 
+        error, 
+        isLoading 
+    }
 }
 
-const useGenres = () => ({data: genres, isLoading: false, error: null});
-
 export default useGenres    
-
-// function useGenres() {
-//     const [genres, setGenres] = useState<Genre[]>([])
-//     const [error, setError] = useState("")
-//     const [isLoading, setIsLoading] = useState(true)
-
-//     useEffect(() => {
-//         const controller = new AbortController()
-//         setIsLoading(true)
-//         apiClient.get<GenreResponse>("/genres", { signal: controller.signal }).then((res) => {
-//             setGenres(res.data.results)
-//             setIsLoading(false)
-//         }).catch((err) => {
-//             if(err instanceof CanceledError) return
-//             setError(err.message)
-//             setIsLoading(false)
-//         })
-
-//         return () => controller.abort()
-//     }, [])
-
-//     return { genres, error, isLoading }
-// }
-

@@ -1,10 +1,17 @@
+import type { AxiosRequestConfig } from "axios"
 import axios from "axios"
+import { API_URL } from "../constants"
 
 // Debug: Log the environment variable
+export interface FetchResponse<T> {
+    count: number
+    next: string | null
+    previous: string | null
+    results: T[]
+}
 
-
-const apiClient = axios.create({
-    baseURL: "https://api.rawg.io/api",
+const axiosInstance = axios.create({
+    baseURL: API_URL,
     headers: {
         "Content-Type": "application/json"
     },
@@ -13,4 +20,32 @@ const apiClient = axios.create({
     }
 })
 
-export default apiClient
+class ApiClient<T> {
+    endpoint: string
+    constructor(endpoint: string,) {
+        this.endpoint = endpoint
+    }
+
+    getAll = (config: AxiosRequestConfig) => {
+        return axiosInstance.get<FetchResponse<T>>(this.endpoint, config)
+        .then((res) => res.data)
+    }
+
+    get = (id: string) => {
+        return axiosInstance.get<T>(`${this.endpoint}/${id}`)
+    }
+
+    create = (data: T) => {
+        return axiosInstance.post(this.endpoint, data)
+    }
+
+    update = (data: T) => {
+        return axiosInstance.put(this.endpoint, data)  
+    }
+
+    delete = (id: number) => {
+        return axiosInstance.delete(`${this.endpoint}/${id}`)
+    }
+}
+
+export default ApiClient

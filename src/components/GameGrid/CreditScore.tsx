@@ -5,7 +5,7 @@ interface Props {
 }
 
 function CreditScore({ score }: Props) {
-    let colorScheme = score > 75 ? "green" : score > 60 ? "yellow" : "red"
+    const colorScheme = score > 75 ? "green" : score > 60 ? "yellow" : "red"
     return (
         <Badge
             colorScheme={colorScheme}

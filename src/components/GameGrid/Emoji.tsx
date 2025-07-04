@@ -1,7 +1,7 @@
 import { Image, type ImageProps } from "@chakra-ui/react"
-import  bullseye from "../../assets/Emojis/bulls-eye.webp"
-import thumbsUp from "../../assets/Emojis/thumbs-up.webp"
+import bullseye from "../../assets/Emojis/bulls-eye.webp"
 import meh from "../../assets/Emojis/meh.webp"
+import thumbsUp from "../../assets/Emojis/thumbs-up.webp"
 
 interface Props {
     rating: number

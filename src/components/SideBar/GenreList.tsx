@@ -1,14 +1,13 @@
-import { Spinner, Heading, Image, HStack, List, ListItem, Button } from "@chakra-ui/react"
-import useGenres, { type Genre } from "../../hooks/useGenres"
+import { Button, Heading, HStack, Image, List, ListItem, Spinner } from "@chakra-ui/react"
+import useGenres from "../../hooks/useGenres"
 import getCroppedImageUrl from "../../services/imageUrl"
+import useGameQueryStore from "../../store/gameQueryStore"
 
-interface Props {
-    onSelectGenre: (genre: Genre) => void
-    selectedGenreId: number | null
-}
 
-function GenreList({ onSelectGenre, selectedGenreId }: Props) {
+function GenreList() {
     const { data, error, isLoading } = useGenres()
+    const selectedGenre = useGameQueryStore(s => s.gameQuery.genre)
+    const setGenre = useGameQueryStore(s => s.setGenre)
 
     if (error) return null
     if (isLoading) return <Spinner />
@@ -16,13 +15,13 @@ function GenreList({ onSelectGenre, selectedGenreId }: Props) {
     return (
         <List.Root padding="5px" width="200px">
             <Heading fontSize="3xl" marginBottom={3} whiteSpace="nowrap">Genres</Heading>
-            {data.map((genre) => (
+            {data?.map((genre) => (
                 <ListItem 
                     key={genre.id} 
                     padding={2}
                     borderRadius={5}
                     _hover={{ backgroundColor: "gray.700" }}
-                    onClick={() => onSelectGenre(genre)} 
+                    onClick={() => setGenre(selectedGenre?.id === genre.id ? null : genre)} 
                     cursor="pointer"
                 >
                     <HStack>
@@ -35,8 +34,8 @@ function GenreList({ onSelectGenre, selectedGenreId }: Props) {
                         <Button
                             whiteSpace="normal"
                             textAlign="left"
-                            fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
-                            onClick={() => onSelectGenre(genre)}
+                            fontWeight={selectedGenre?.id === genre.id ? "bold" : "normal"}
+                            onClick={() => setGenre(selectedGenre?.id === genre.id ? null : genre)}
                             fontSize="lg"
                             variant="ghost"
                         >
