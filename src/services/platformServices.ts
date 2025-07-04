@@ -6,6 +6,6 @@ export interface Platform {
     slug: string
 }
 
-const platformService = new ApiClient<Platform>("/platforms/lists/parents", { params: { pageSize: 100 } })
+const platformService = new ApiClient<Platform>("/platforms/lists/parents")
 
 export default platformService

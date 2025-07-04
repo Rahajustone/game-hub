@@ -2,16 +2,14 @@ import { Button, Menu, Portal, Spinner } from "@chakra-ui/react"
 import { useState } from "react"
 import { LuChevronDown, LuChevronUp } from "react-icons/lu"
 import usePlatforms from "../../hooks/usePlatform"
-import type { Platform } from "../../services/platformServices"
+import useGameQueryStore from "../../store/gameQueryStore"
 
-interface Props {
-    onSelectPlatform: (platform: Platform) => void
-    selectedPlatform: Platform | null
-}
 
-function PlatformSelector({ onSelectPlatform, selectedPlatform }: Props) {
+function PlatformSelector() {
     const [isOpen, setIsOpen] = useState(false)
     const { data, error, isLoading } = usePlatforms()
+    const selectedPlatform = useGameQueryStore(s => s.gameQuery.platform)
+    const setPlatform = useGameQueryStore(s => s.setPlatform)
 
     if (error) return null
     if (isLoading) return <Spinner />
@@ -32,7 +30,7 @@ function PlatformSelector({ onSelectPlatform, selectedPlatform }: Props) {
                             <Menu.Item 
                                 key={platform.id} 
                                 value={platform.name}
-                                onClick={() => onSelectPlatform(platform)}
+                                onClick={() => setPlatform(selectedPlatform?.id === platform.id ? null : platform)}
                             >
                                 {platform.name}
                             </Menu.Item>

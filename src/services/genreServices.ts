@@ -7,6 +7,6 @@ export interface Genre {
     image_background: string
 }
 
-const genreService = new ApiClient<Genre>("/genres", { params: { pageSize: 10 } })
+const genreService = new ApiClient<Genre>("/genres")
 
 export default genreService

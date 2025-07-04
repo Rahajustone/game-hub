@@ -14,6 +14,6 @@ export interface Game {
     genres: { id: number, name: string }[]
 }
 
-const gameService = new ApiClient<Game>("/games", { params: { pageSize: 10 } })
+const gameService = new ApiClient<Game>("/games")
 
 export default gameService

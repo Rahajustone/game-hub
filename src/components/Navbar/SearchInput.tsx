@@ -1,17 +1,15 @@
 import { Input, InputGroup } from "@chakra-ui/react"
 import { useState } from "react"
 import { LuSearch } from "react-icons/lu"
+import useGameQueryStore from "../../store/gameQueryStore"
 
-interface Props {
-    onSearch: (searchText: string) => void
-}
-
-function SearchInput({ onSearch }: Props) {
+function SearchInput() {
     const [value, setValue] = useState("")
+    const setSearchText = useGameQueryStore(s => s.setSearchText)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        onSearch(value)
+        setSearchText(value)
     }
 
     return (
